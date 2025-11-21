@@ -20,9 +20,15 @@
                     <div class="desc">
                         <a :href="item.label" class="title">{{ item.title }}</a><br>
                         <!-- <span class="title">{{ item.title }}</span><br> -->
-                        <span>项目时间：{{ item.time }}</span>
+                        <!-- <span>项目时间：{{ item.time }}</span> -->
+                         <span class="spanicon"><svg t="1763739628070" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5952"><path d="M512 73.142857C269.604571 73.142857 73.142857 269.604571 73.142857 512s196.461714 438.857143 438.857143 438.857143 438.857143-196.461714 438.857143-438.857143S754.395429 73.142857 512 73.142857z m0-73.142857c282.770286 0 512 229.229714 512 512s-229.229714 512-512 512S0 794.770286 0 512 229.229714 0 512 0z" fill="#666666" p-id="5953"></path><path d="M521.142857 182.857143C495.908571 182.857143 475.428571 203.337143 475.428571 228.571429V548.571429a45.714286 45.714286 0 0 0 91.428572 0V228.571429c0-25.234286-20.48-45.714286-45.714286-45.714286z" fill="#666666" p-id="5954"></path><path d="M523.337143 507.611429a45.714286 45.714286 0 0 0-32.292572 78.043428l165.778286 160.548572a45.714286 45.714286 0 0 0 64.621714-64.585143l-165.778285-160.621715a45.568 45.568 0 0 0-32.329143-13.385142z" p-id="5955"></path></svg> 
+                            {{ item.time }}
+                            &nbsp;
+                            <svg t="1763740826758" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7767"><path d="M512 298.666667c-162.133333 0-285.866667 68.266667-375.466667 213.333333 89.6 145.066667 213.333333 213.333333 375.466667 213.333333s285.866667-68.266667 375.466667-213.333333c-89.6-145.066667-213.333333-213.333333-375.466667-213.333333z m0 469.333333c-183.466667 0-328.533333-85.333333-426.666667-256 98.133333-170.666667 243.2-256 426.666667-256s328.533333 85.333333 426.666667 256c-98.133333 170.666667-243.2 256-426.666667 256z m0-170.666667c46.933333 0 85.333333-38.4 85.333333-85.333333s-38.4-85.333333-85.333333-85.333333-85.333333 38.4-85.333333 85.333333 38.4 85.333333 85.333333 85.333333z m0 42.666667c-72.533333 0-128-55.466667-128-128s55.466667-128 128-128 128 55.466667 128 128-55.466667 128-128 128z" p-id="7768"></path></svg>
+                            {{ item.look }}
+                        </span>
                         <span>技术栈：{{ item.technology }}</span>
-                        <div class="api" v-if="item.api"><span>后端api：</span><a :href="item.api" class="api">{{ item.api }} </a></div>
+                        <!-- <div class="api" v-if="item.api"><span>后端api：</span><a :href="item.api" class="api">{{ item.api }} </a></div> -->
                         <a :href="item.label">进入 →</a>
                         <!-- <span>项目亮点：</span> -->
                         <!-- <div class="wb">
@@ -74,6 +80,7 @@ export default {
                     imgurl:'./img/vscolod_github+cloudflare.jpg',
                     title:"本地项目上传到github上并部署到cloudflare", 
                     time:"2025.10.11", 
+                    look: "9",
                     technology:"vscolod、github、cloudflare", 
                     Introduction:"零基础手把手教你如何把自己的项目上传到github上并部署到cloudflare" 
                 },
@@ -82,6 +89,7 @@ export default {
                     imgurl:'./img/pm2-logo.jpg',
                     title:"使用 PM2 部署 Vue 应用指南", 
                     time:"2025.07.10", 
+                    look: "6",
                     technology:"PM2", 
                     Introduction:"零基础手把手教你如何把自己的vue项目上传到自己的服务器上,并设置成开机自启模式" 
                 },
@@ -90,6 +98,7 @@ export default {
                     imgurl:'./img/PM2+API.jpg',
                     title:"使用PM2搭建后端api接口", 
                     time:"2025.07.10", 
+                    look: "8",
                     technology:"PM2、MySQL", 
                     Introduction:"零基础手把手教你如何应用PM2搭建连接数据库的api接口" 
                 },
@@ -98,6 +107,7 @@ export default {
                     imgurl:'./img/VUE.jpg',
                     title:"vue项目在服务器临时开启服务", 
                     time:"2025.07.10", 
+                    look: "3",
                     technology:"PM2", 
                     Introduction:"零基础手把手教你如何把自己的vue项目上传到自己的服务器上（此步骤只适应临时挂载，服务器终端一旦关闭就不生效了）" 
                 },
@@ -106,6 +116,7 @@ export default {
                     imgurl:'./img/vue+MySQL.jpg',
                     title:"Vue项目连接数据库(本地)", 
                     time:"2025.07.10", 
+                    look: "7",
                     technology:"vue、MySQL", 
                     Introduction:"零基础手把手教你vue如何链接数据库并渲染信息到页面上" 
                 },
@@ -114,6 +125,7 @@ export default {
                     imgurl:'./img/nginx_logo.jpg',
                     title:"Nginx托管静态网页", 
                     time:"2025.07.10", 
+                    look: "0",
                     technology:"Nginx", 
                     Introduction:"nginx是一款 HTTP Web 服务器、反向代理、内容缓存、负载均衡器、TCP/UDP 代理服务器和邮件代理服务器，它可以将你的网页呈现在浏览器上供用户浏览。" 
                 },
@@ -122,6 +134,7 @@ export default {
                     imgurl:'./img/Visual_C++.jpg',
                     title:"Visual C++ 6.0 操作步骤", 
                     time:"2025.07.10", 
+                    look: "5",
                     technology:"Visual C++ 6.0 操作步骤", 
                     Introduction:"Visual C++ 6.0 操作步骤" 
                 },
@@ -130,6 +143,7 @@ export default {
                     imgurl:'./img/eclipse.jpg',
                     title:"eclips创建JavaWeb项目流程", 
                     time:"2025.07.10", 
+                    look: "1",
                     technology:"eclips创建JavaWeb项目流程", 
                     Introduction:"eclips创建JavaWeb项目流程" 
                 }
@@ -445,6 +459,13 @@ body {
     /* font-size: 30px; 标题文字大小 */
     text-align: center; /* 标题居中 */
 } 
+.item .desc .spanicon{
+    color: #989898;
+}
+.item .desc .spanicon .icon{
+    width: 15px;
+    height: 15px;
+}
 .item .desc .wb {
     /* width: 90%; */
     display: block;

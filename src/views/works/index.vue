@@ -20,7 +20,12 @@
                     <div class="desc">
                         <a :href="item.label" class="title">{{ item.title }}</a><br>
                         <!-- <span class="title">{{ item.title }}</span><br> -->
-                        <span>项目时间：{{ item.time }}</span>
+                        <span class="spanicon"><svg t="1763739628070" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5952"><path d="M512 73.142857C269.604571 73.142857 73.142857 269.604571 73.142857 512s196.461714 438.857143 438.857143 438.857143 438.857143-196.461714 438.857143-438.857143S754.395429 73.142857 512 73.142857z m0-73.142857c282.770286 0 512 229.229714 512 512s-229.229714 512-512 512S0 794.770286 0 512 229.229714 0 512 0z" fill="#666666" p-id="5953"></path><path d="M521.142857 182.857143C495.908571 182.857143 475.428571 203.337143 475.428571 228.571429V548.571429a45.714286 45.714286 0 0 0 91.428572 0V228.571429c0-25.234286-20.48-45.714286-45.714286-45.714286z" fill="#666666" p-id="5954"></path><path d="M523.337143 507.611429a45.714286 45.714286 0 0 0-32.292572 78.043428l165.778286 160.548572a45.714286 45.714286 0 0 0 64.621714-64.585143l-165.778285-160.621715a45.568 45.568 0 0 0-32.329143-13.385142z" p-id="5955"></path></svg> 
+                            {{ item.time }}
+                            &nbsp;
+                            <svg t="1763740826758" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7767"><path d="M512 298.666667c-162.133333 0-285.866667 68.266667-375.466667 213.333333 89.6 145.066667 213.333333 213.333333 375.466667 213.333333s285.866667-68.266667 375.466667-213.333333c-89.6-145.066667-213.333333-213.333333-375.466667-213.333333z m0 469.333333c-183.466667 0-328.533333-85.333333-426.666667-256 98.133333-170.666667 243.2-256 426.666667-256s328.533333 85.333333 426.666667 256c-98.133333 170.666667-243.2 256-426.666667 256z m0-170.666667c46.933333 0 85.333333-38.4 85.333333-85.333333s-38.4-85.333333-85.333333-85.333333-85.333333 38.4-85.333333 85.333333 38.4 85.333333 85.333333 85.333333z m0 42.666667c-72.533333 0-128-55.466667-128-128s55.466667-128 128-128 128 55.466667 128 128-55.466667 128-128 128z" p-id="7768"></path></svg>
+                            {{ item.look }}
+                        </span>
                         <span>技术栈：{{ item.technology }}</span>
                         <div class="api" v-if="item.api"><span>后端api：</span><a :href="item.api" class="api">{{ item.api }} </a></div>
                         <a :href="item.label">进入 →</a>
@@ -73,6 +78,7 @@ export default {
                     imgurl:'./img/小米logo.jpg',
                     title:"使用Cloudflare Workers + github部署Vue仿小米商城", 
                     time:"2025.06-2025.07", 
+                    look:"10",
                     technology:"HTML、CSS、JavaScript、vue3、vueRouter", 
                     wb_p1:"1、利用vue框架进行网站搭建",
                     wb_p2:"2、熟练运用HTML、css、javascript对网页页面做美化处理",
@@ -87,6 +93,7 @@ export default {
                     imgurl:'./img/tiktok-vue.jpg',
                     title:"使用PM2部署vue2 + JSON 密码管理系统", 
                     time:"2025.08-2025.09", 
+                    look:"5",
                     technology:"vue2、vuex、Node.js、JSON、axios、PM2",
                     api: "http://47.79.40.65:3000/api", 
                     wb_p1:"1、可以收起、展开数据列表。适配电脑和移动端",
@@ -104,6 +111,7 @@ export default {
                     imgurl:'./img/hm-shopping.jpg',
                     title:"使用Cloudflare Workers + github部署Vue购物商城", 
                     time:"2025.01-2025.03", 
+                    look:"6",
                     technology:"HTML、CSS、JavaScript、vue3、vueRouter", 
                     wb_p1:"1、利用vue框架进行网站搭建",
                     wb_p2:"2、熟练运用HTML、css、javascript对网页页面做美化处理",
@@ -118,6 +126,7 @@ export default {
                     imgurl:'./img/tiktok-demo.jpg',
                     title:"使用Cloudflare Workers + github部署vue密码管理项目", 
                     time:"2025.09-2025.09", 
+                    look:"7",
                     technology:"vue3、vueRouter、vuex、Node.js、MySQL、axios",
                     api: "https://gist.githubusercontent.com/xkai003/4886740985f4d6276636b3d35c6a3744/raw/9069e4ecd9e7f605d80e54ded6427f1d6750c1e4/tiktok-data.json", 
                     wb_p1:"1、应用vue框架搭建的多页面应用程序(测试账号是：XiaoTang；密码是：123456)",
@@ -133,6 +142,7 @@ export default {
                     imgurl:'./img/Vue_我的课堂管理系统.jpg',
                     title:"使用Cloudflare Workers + github部署vue我的课堂管理系统", 
                     time:"2025.03-2025.04", 
+                    look:"4",
                     technology:"vue3、vueRouter、vuex、Node.js、MySQL、axios",
                     api: "https://gist.githubusercontent.com/xkai003/dffaa48ea67e287c8b49cb918cfa9a4b/raw/3d7241f6fa70e693a37f9e0b9b7e7b23010a3ec6/MyClassroomManagementSystem.json",
                     wb_p1:"1、应用vue框架搭建的多页面应用程序",
@@ -148,6 +158,7 @@ export default {
                     imgurl:'./img/京东log.png',
                     title:"京东", 
                     time:"2025-1-1", 
+                    look:"3",
                     technology:"HTML、CSS、JavaScript", 
                     wb_p1:"1、应用前端相关知识仿写京东商城"
                 },
@@ -156,6 +167,7 @@ export default {
                     imgurl:'./img/小黑记账清单（有饼图）.png',
                     title:"阿茂成绩单", 
                     time:"2025-1-1", 
+                    look:"8",
                     technology:"HTML、CSS、JavaScript、vue3、vueRouter", 
                     wb_p1:"1、随着人们的生活水平的提高，日常消费种类不断增多，想必你也遇到过面对这些琳琅满目的开支而感到苦恼"
                 },
@@ -164,6 +176,7 @@ export default {
                     imgurl:'./img/notebook.png',
                     title:"阿茂记事本", 
                     time:"2025-1-1", 
+                    look:"1",
                     technology:"HTML、CSS、JavaScript、vue3、vueRouter", 
                     wb_p1:"1、自己的人生自己来规划，人生短短三万天，我们要学会充分规划好每一天，正所谓：机会永远留给有准备的人。让我们动起手来一起规划明天的目标吧。"
                 },
@@ -172,6 +185,7 @@ export default {
                     imgurl:'./img/保护海洋2.jpg',
                     title:"保护海洋", 
                     time:"2025-1-1", 
+                    look:"1",
                     technology:"HTML、CSS、JavaScript、vue3、vueRouter", 
                     wb_p1:"1、生活污水成为海洋环境的重要污染源，日常生活习惯会造成海洋环境的污染。有研究表明，污水已经导致沙丁鱼等近10种鱼类产卵和发育受到影响。"
                 },
@@ -180,6 +194,7 @@ export default {
                     imgurl:'./img/xhz2.png',
                     title:"惜花芷", 
                     time:"2025-2-8", 
+                    look:"1",
                     technology:"HTML、CSS、JavaScript",
                     wb_p1:"1、这是一部电视剧"
                 },
@@ -188,6 +203,7 @@ export default {
                     imgurl:'./img/天安门.jpg',
                     title:"北京", 
                     time:"2025-2-8", 
+                    look:"1",
                     technology:"HTML、CSS、JavaScript", 
                     wb_p1:"1、这是一个景点web"
                 },
@@ -196,6 +212,7 @@ export default {
                     imgurl:'./img/易烊千玺.jpg',
                     title:"易烊千玺", 
                     time:"2025-2-18", 
+                    look:"1",
                     technology:"HTML、CSS、JavaScript", 
                     wb_p1:"这是一个期末作业"
                 },
@@ -204,6 +221,7 @@ export default {
                     imgurl:'./img/Nginx托管静态简历网页.jpg',
                     title:"Nginx托管静态简历网页", 
                     time:"2023-10-18", 
+                    look:"1",
                     technology:"HTML、CSS、JavaScript", 
                     wb_p1:"这是一个期末作业"
                 },
@@ -212,6 +230,7 @@ export default {
                     imgurl:'./img/love.jpg',
                     title:"HTML爱心", 
                     time:"2023-9-10", 
+                    look:"1",
                     technology:"HTML、CSS、JavaScript", 
                     wb_p1:"这是一个用HTML编写的爱心"
                 },
@@ -220,6 +239,7 @@ export default {
                     imgurl:'./img/PythonLove.jpg',
                     title:"Python爱心", 
                     time:"2023-9-10", 
+                    look:"1",
                     technology:"Python", 
                     wb_p1:"这是一个用Python编写的爱心"
                 }
@@ -545,6 +565,13 @@ body {
     /* font-size: 30px; 标题文字大小 */
     text-align: center; /* 标题居中 */
 } 
+.item .desc .spanicon{
+    color: #989898;
+}
+.item .desc .spanicon .icon{
+    width: 15px;
+    height: 15px;
+}
 .item .desc .wb {
     /* width: 90%; */
     display: block;
