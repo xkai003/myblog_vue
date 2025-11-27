@@ -41,7 +41,6 @@
                             <p>{{ item.wb_p8 }}</p>
                             <p>{{ item.wb_p9 }}</p>
                         </div> -->
-                        <!-- fsdf -->
                     </div>
                 </div>
             <!-- </a> -->
