@@ -74,7 +74,80 @@ export default {
             staticCurrentPage: 1,
             searchQuery: '', // 获取搜索输入框的信息
             // 作品列表
-            
+            VueWebList: [
+                { 
+                    label:'./notes/vscolod_github+cloudflare/vscolod_github+cloudflare.html',
+                    imgurl:'./img/vscolod_github+cloudflare.jpg',
+                    title:"本地项目上传到github上并部署到cloudflare", 
+                    time:"2025.10.11", 
+                    look: "9",
+                    technology:"vscolod、github、cloudflare", 
+                    Introduction:"零基础手把手教你如何把自己的项目上传到github上并部署到cloudflare" 
+                },
+                { 
+                    label:'./notes/WindTerm_PM2/WindTerm_PM2.html',
+                    imgurl:'./img/pm2-logo.jpg',
+                    title:"使用 PM2 部署 Vue 应用指南", 
+                    time:"2025.07.10", 
+                    look: "6",
+                    technology:"PM2", 
+                    Introduction:"零基础手把手教你如何把自己的vue项目上传到自己的服务器上,并设置成开机自启模式" 
+                },
+                { 
+                    label:'./notes/pm2+api/pm2+api.html',
+                    imgurl:'./img/PM2+API.jpg',
+                    title:"使用PM2搭建后端api接口", 
+                    time:"2025.07.10", 
+                    look: "8",
+                    technology:"PM2、MySQL", 
+                    Introduction:"零基础手把手教你如何应用PM2搭建连接数据库的api接口" 
+                },
+                { 
+                    label:'./notes/vue_ServerLocalhost/vue_ServerLocalhost.html',
+                    imgurl:'./img/VUE.jpg',
+                    title:"vue项目在服务器临时开启服务", 
+                    time:"2025.07.10", 
+                    look: "3",
+                    technology:"PM2", 
+                    Introduction:"零基础手把手教你如何把自己的vue项目上传到自己的服务器上（此步骤只适应临时挂载，服务器终端一旦关闭就不生效了）" 
+                },
+                { 
+                    label:'./notes/vue+MySQL/vue+MySQL.html',
+                    imgurl:'./img/vue+MySQL.jpg',
+                    title:"Vue项目连接数据库(本地)", 
+                    time:"2025.07.10", 
+                    look: "7",
+                    technology:"vue、MySQL", 
+                    Introduction:"零基础手把手教你vue如何链接数据库并渲染信息到页面上" 
+                },
+                { 
+                    label:'./notes/Nginx_HostedWeb/Nginx_HostedWeb.html',
+                    imgurl:'./img/nginx_logo.jpg',
+                    title:"Nginx托管静态网页", 
+                    time:"2025.07.10", 
+                    look: "0",
+                    technology:"Nginx", 
+                    Introduction:"nginx是一款 HTTP Web 服务器、反向代理、内容缓存、负载均衡器、TCP/UDP 代理服务器和邮件代理服务器，它可以将你的网页呈现在浏览器上供用户浏览。" 
+                },
+                { 
+                    label:'./notes/Visual_C++/Visual_C++.html',
+                    imgurl:'./img/Visual_C++.jpg',
+                    title:"Visual C++ 6.0 操作步骤", 
+                    time:"2025.07.10", 
+                    look: "5",
+                    technology:"Visual C++ 6.0 操作步骤", 
+                    Introduction:"Visual C++ 6.0 操作步骤" 
+                },
+                { 
+                    label:'./notes/eclips_JavaWeb/eclips_JavaWeb.html',
+                    imgurl:'./img/eclipse.jpg',
+                    title:"eclips创建JavaWeb项目流程", 
+                    time:"2025.07.10", 
+                    look: "1",
+                    technology:"eclips创建JavaWeb项目流程", 
+                    Introduction:"eclips创建JavaWeb项目流程" 
+                }
+            ]
         }
     },
     computed: {
