@@ -21,11 +21,11 @@ const routes = [
     name: 'Travel',
     component: () => import('../views/travel/index.vue')
   },
-  // {
-  //   path: '/work',
-  //   name: 'Work',
-  //   component: () => import('../views/baohuhaiyang/haiyanqingfei.html')
-  // },
+  {
+    path: '/management',
+    name: 'management',
+    component: () => import('../views/management/index.vue')
+  }
 ];
 
 const router = createRouter({
