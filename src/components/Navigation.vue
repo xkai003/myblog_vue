@@ -14,6 +14,10 @@
                 <router-link to="/works">作品</router-link>
                 <router-link to="/notes">笔记</router-link>
                 <router-link to="/travel">旅游</router-link>
+                <!--  -->
+                <a href="https://blog-e3z.pages.dev/" class="switch" title="切换回HTML版本">
+                    <svg t="1763776418514" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5640" ><path d="M96 448h832a32 32 0 0 0 22.6-54.6l-224-224a32 32 0 0 0-45.2 45.2L850.7 384H96a32 32 0 0 0 0 64zM928 576H96a32 32 0 0 0-22.6 54.6l224 224a31.9 31.9 0 0 0 45.2 0 31.9 31.9 0 0 0 0-45.2L173.3 640H928a32 32 0 1 0 0-64z" p-id="5641"></path></svg>
+                </a>
             </div>
         </transition>
         <!-- 渲染匹配到的路由组件 -->
@@ -94,6 +98,24 @@ body {
     width: 80px;
     height: 80px;
     border-radius: 50%; 
+}
+/* 切换版本 */
+.sidebar .switch{
+    position: absolute;
+    left: 0;
+    bottom: 7%;
+}.sidebar .switch:hover{
+    background-color: #fff;
+}
+.sidebar .switch .icon{
+    width: 20px;
+    height: 20px;
+}
+.sidebar .switch .icon{
+    fill: #333333
+}
+.sidebar .switch:hover .icon{
+    fill: red;
 }
 /* 主内容部分的样式 */
 #mainContent {
