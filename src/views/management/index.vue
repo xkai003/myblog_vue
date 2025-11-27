@@ -8,7 +8,7 @@
             </div>
             <div class="header-actions">
             <!-- <span class="welcome-text">欢迎，{{ getCurrentUser() }}</span> -->
-            <button @click="logout" class="logout-btn">退出登录</button>
+            <!-- <button @click="logout" class="logout-btn">退出登录</button> -->
             </div>
         </div>
         </div>
