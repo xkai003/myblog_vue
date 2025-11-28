@@ -7,7 +7,7 @@
             <p>管理你的博客内容</p>
           </div>
           <div class="header-actions">
-            <span class="welcome-text">欢迎，tmk</span>
+            <span class="welcome-text">欢迎，tmk000</span>
             <button class="logout-btn">退出登录</button>
           </div>
         </div>
