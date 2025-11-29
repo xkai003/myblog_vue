@@ -67,7 +67,7 @@ body {
     padding-top: 60px;
     width: 200px;
     height: 100vh;
-    background-color: #fff;
+    background-color: #fdfbf2;
     /* border: 1px solid red; */
 }
 
