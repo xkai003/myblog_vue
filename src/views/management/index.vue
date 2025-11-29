@@ -1,162 +1,180 @@
 <template>
-  <div class="admin-container">
-    <div class="header">
-      <div class="header-content">
-        <div class="header-text">
-          <h1>后台管理系统</h1>
-          <p>管理你的博客内容</p>
-        </div>
-        <div class="header-actions">
-          <!-- <span class="welcome-text">欢迎，{{ getCurrentUser() }}</span> -->
-          <span class="welcome-text">欢迎，你好</span>
-          <button @click="logout" class="logout-btn">退出登录</button>
+  <div class="body">
+    <div class="admin-container">
+
+      <!-- 标题部分 -->
+      <div class="header">
+        <div class="header-content">
+          <div class="header-text">
+            <h1>博客后台管理系统</h1>
+          </div>
+          <div class="header-actions">
+            <!-- <span class="welcome-text">欢迎，{{ getCurrentUser() }}</span> -->
+            <span class="welcome-text">欢迎，你好</span>
+            <button @click="logout" class="logout-btn">退出登录</button>
+          </div>
         </div>
       </div>
-    </div>
-
-    <div class="tabs">
-      <button
-        v-for="tab in tabs"
-        :key="tab.name"
-        :class="['tab-button', { active: activeTab === tab.name }]"
-        @click="activeTab = tab.name"
-      >
-        {{ tab.label }}
-      </button>
-    </div>
-
-    <!-- 作品管理 -->
-    <div v-if="activeTab === 'works'" class="tab-content">
-      <h2>添加作品</h2>
-      <form @submit.prevent="addWork" class="admin-form">
-        <div class="form-group">
-          <label>标题:</label>
-          <input v-model="newWork.title" type="text" required>
-        </div>
-        <div class="form-group">
-          <label>链接:</label>
-          <input v-model="newWork.label" type="url" required>
-        </div>
-        <div class="form-group">
-          <label>技术栈:</label>
-          <input v-model="newWork.technology" type="text" required>
-        </div>
-        <div class="form-group">
-          <label>时间:</label>
-          <input v-model="newWork.time" type="text" required>
-        </div>
-        <div class="form-group">
-          <label>查看次数:</label>
-          <input v-model.number="newWork.look" type="number" required>
-        </div>
-        <div class="form-group">
-          <label>后端API (可选):</label>
-          <input v-model="newWork.api" type="url">
-        </div>
-        <div class="form-group">
-          <label>项目亮点描述:</label>
-          <textarea v-model="newWork.wb_p1" rows="3" placeholder="亮点1"></textarea>
-          <textarea v-model="newWork.wb_p2" rows="3" placeholder="亮点2"></textarea>
-          <textarea v-model="newWork.wb_p3" rows="3" placeholder="亮点3"></textarea>
-        </div>
-        <button type="submit" class="submit-btn">添加作品</button>
-      </form>
-
-      <h3>现有作品列表</h3>
-      <div class="items-list">
-        <!-- <div v-for="(item, index) in workslist" :key="index" class="item-card">
-          <h4>{{ item.title }}</h4>
-          <p>{{ item.technology }}</p>
-          <button @click="deleteWork(index)" class="delete-btn">删除</button>
-        </div> -->
+      <!-- 按钮部分 -->
+      <div class="tabs">
+        <button
+          v-for="tab in tabs"
+          :key="tab.name"
+          :class="['tab-button', { active: activeTab === tab.name }]"
+          @click="activeTab = tab.name"
+        >
+          {{ tab.label }}
+        </button>
       </div>
-    </div>
 
-    <!-- 笔记管理 -->
-    <div v-if="activeTab === 'notes'" class="tab-content">
-      <h2>添加笔记</h2>
-      <form @submit.prevent="addNote" class="admin-form">
-        <div class="form-group">
-          <label>标题:</label>
-          <input v-model="newNote.title" type="text" required>
-        </div>
-        <div class="form-group">
-          <label>链接:</label>
-          <input v-model="newNote.label" type="url" required>
-        </div>
-        <div class="form-group">
-          <label>描述:</label>
-          <textarea v-model="newNote.description" rows="4" required></textarea>
-        </div>
-        <div class="form-group">
-          <label>时间:</label>
-          <input v-model="newNote.time" type="text" required>
-        </div>
-        <div class="form-group">
-          <label>查看次数:</label>
-          <input v-model.number="newNote.look" type="number" required>
-        </div>
-        <button type="submit" class="submit-btn">添加笔记</button>
-      </form>
+      <!-- 作品管理 -->
+      <div v-if="activeTab === 'works'" class="tab-content">
+        <h2>添加作品</h2>
+        <form @submit.prevent="addWork" class="admin-form">
+          <div class="form-group">
+            <label>标题:</label>
+            <input v-model="newWork.title" type="text" required>
+          </div>
+          <div class="form-group">
+            <label>链接:</label>
+            <input v-model="newWork.label" type="url" required>
+          </div>
+          <div class="form-group">
+            <label>技术栈:</label>
+            <input v-model="newWork.technology" type="text" required>
+          </div>
+          <div class="form-group">
+            <label>时间:</label>
+            <input v-model="newWork.time" type="text" required>
+          </div>
+          <div class="form-group">
+            <label>查看次数:</label>
+            <input v-model.number="newWork.look" type="number" required>
+          </div>
+          <div class="form-group">
+            <label>后端API (可选):</label>
+            <input v-model="newWork.api" type="url">
+          </div>
+          <div class="form-group">
+            <label>项目亮点描述:</label>
+            <textarea v-model="newWork.wb_p1" rows="3" placeholder="亮点1"></textarea>
+            <textarea v-model="newWork.wb_p2" rows="3" placeholder="亮点2"></textarea>
+            <textarea v-model="newWork.wb_p3" rows="3" placeholder="亮点3"></textarea>
+          </div>
+          <button type="submit" class="submit-btn">添加作品</button>
+        </form>
 
-      <h3>现有笔记列表</h3>
-      <div class="items-list">
-        <!-- <div v-for="(item, index) in noteslist" :key="index" class="item-card">
-          <h4>{{ item.title }}</h4>
-          <p>{{ item.description }}</p>
-          <button @click="deleteNote(index)" class="delete-btn">删除</button>
-        </div> -->
+        <h3>现有作品列表</h3>
+        <div class="items-list">
+          <!-- <div v-for="(item, index) in workslist" :key="index" class="item-card">
+            <h4>{{ item.title }}</h4>
+            <p>{{ item.technology }}</p>
+            <button @click="deleteWork(index)" class="delete-btn">删除</button>
+          </div> -->
+          <div class="item-card">
+            <h4>标题</h4>
+            <p>描述</p>
+            <button class="delete-btn">删除</button>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <!-- 旅游管理 -->
-    <div v-if="activeTab === 'travel'" class="tab-content">
-      <h2>添加旅游记录</h2>
-      <form @submit.prevent="addTravel" class="admin-form">
-        <div class="form-group">
-          <label>标题:</label>
-          <input v-model="newTravel.title" type="text" required>
-        </div>
-        <div class="form-group">
-          <label>链接:</label>
-          <input v-model="newTravel.label" type="url" required>
-        </div>
-        <div class="form-group">
-          <label>地点:</label>
-          <input v-model="newTravel.location" type="text" required>
-        </div>
-        <div class="form-group">
-          <label>描述:</label>
-          <textarea v-model="newTravel.description" rows="4" required></textarea>
-        </div>
-        <div class="form-group">
-          <label>时间:</label>
-          <input v-model="newTravel.time" type="text" required>
-        </div>
-        <div class="form-group">
-          <label>查看次数:</label>
-          <input v-model.number="newTravel.look" type="number" required>
-        </div>
-        <button type="submit" class="submit-btn">添加旅游记录</button>
-      </form>
+      <!-- 笔记管理 -->
+      <div v-if="activeTab === 'notes'" class="tab-content">
+        <h2>添加笔记</h2>
+        <form @submit.prevent="addNote" class="admin-form">
+          <div class="form-group">
+            <label>标题:</label>
+            <input v-model="newNote.title" type="text" required>
+          </div>
+          <div class="form-group">
+            <label>链接:</label>
+            <input v-model="newNote.label" type="url" required>
+          </div>
+          <div class="form-group">
+            <label>描述:</label>
+            <textarea v-model="newNote.description" rows="4" required></textarea>
+          </div>
+          <div class="form-group">
+            <label>时间:</label>
+            <input v-model="newNote.time" type="text" required>
+          </div>
+          <div class="form-group">
+            <label>查看次数:</label>
+            <input v-model.number="newNote.look" type="number" required>
+          </div>
+          <button type="submit" class="submit-btn">添加笔记</button>
+        </form>
 
-      <h3>现有旅游记录列表</h3>
-      <div class="items-list">
-        <!-- <div v-for="(item, index) in travellist" :key="index" class="item-card">
-          <h4>{{ item.title }}</h4>
-          <p>{{ item.location }} - {{ item.description }}</p>
-          <button @click="deleteTravel(index)" class="delete-btn">删除</button>
-        </div> -->
+        <h3>现有笔记列表</h3>
+        <div class="items-list">
+          <!-- <div v-for="(item, index) in noteslist" :key="index" class="item-card">
+            <h4>{{ item.title }}</h4>
+            <p>{{ item.description }}</p>
+            <button @click="deleteNote(index)" class="delete-btn">删除</button>
+          </div> -->
+          <div class="item-card">
+            <h4>标题</h4>
+            <p>描述</p>
+            <button class="delete-btn">删除</button>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <!-- 保存按钮 -->
-    <div class="save-section">
-      <button @click="saveToGist" class="save-btn" :disabled="saving">
-        {{ saving ? '保存中...' : '保存到 GitHub Gist' }}
-      </button>
-      <div v-if="saveMessage" :class="['message', saveSuccess ? 'success' : 'error']">
-        {{ saveMessage }}
+      <!-- 旅游管理 -->
+      <div v-if="activeTab === 'travel'" class="tab-content">
+        <h2>添加旅游记录</h2>
+        <form @submit.prevent="addTravel" class="admin-form">
+          <div class="form-group">
+            <label>标题:</label>
+            <input v-model="newTravel.title" type="text" required>
+          </div>
+          <div class="form-group">
+            <label>链接:</label>
+            <input v-model="newTravel.label" type="url" required>
+          </div>
+          <div class="form-group">
+            <label>地点:</label>
+            <input v-model="newTravel.location" type="text" required>
+          </div>
+          <div class="form-group">
+            <label>描述:</label>
+            <textarea v-model="newTravel.description" rows="4" required></textarea>
+          </div>
+          <div class="form-group">
+            <label>时间:</label>
+            <input v-model="newTravel.time" type="text" required>
+          </div>
+          <div class="form-group">
+            <label>查看次数:</label>
+            <input v-model.number="newTravel.look" type="number" required>
+          </div>
+          <button type="submit" class="submit-btn">添加旅游记录</button>
+        </form>
+
+        <h3>现有旅游记录列表</h3>
+        <div class="items-list">
+          <!-- <div v-for="(item, index) in travellist" :key="index" class="item-card">
+            <h4>{{ item.title }}</h4>
+            <p>{{ item.location }} - {{ item.description }}</p>
+            <button @click="deleteTravel(index)" class="delete-btn">删除</button>
+          </div> -->
+          <div class="item-card">
+            <h4>标题</h4>
+            <p>描述</p>
+            <button class="delete-btn">删除</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 保存按钮 -->
+      <div class="save-section">
+        <button @click="saveToGist" class="save-btn" :disabled="saving">
+          {{ saving ? '保存中...' : '保存到 GitHub Gist' }}
+        </button>
+        <div v-if="saveMessage" :class="['message', saveSuccess ? 'success' : 'error']">
+          {{ saveMessage }}
+        </div>
       </div>
     </div>
   </div>
@@ -319,12 +337,22 @@ export default {
 </script>
 
 <style scoped>
+.body{
+  width: 100%;
+  height: 100%;
+  background-color: rgba(250, 246, 246, 0.8);
+  /* 方格背景 */
+  background: linear-gradient(90deg, rgba(200, 200, 200, 0.1) 3%, transparent 0),
+  linear-gradient(rgba(200, 200, 200, 0.1) 3%, transparent 0);
+  background-size: 20px 20px;
+}
 .admin-container {
   max-width: 1200px;
+  min-height: 100vh;
   margin: 0 auto;
   padding: 20px;
-  background-color: rgba(250, 246, 246, 0.8);
-  min-height: 100vh;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .header {
@@ -414,7 +442,7 @@ export default {
   background-color: #fff;
   padding: 30px;
   border-radius: 0 10px 10px 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  /* box-shadow: 0 2px 10px rgba(0,0,0,0.1); */
   margin-bottom: 30px;
 }
 
@@ -505,11 +533,12 @@ export default {
 
 .save-section {
   text-align: center;
-  margin-top: 40px;
-  padding: 20px;
+  /* margin-top: 40px; */
+  /* padding: 20px; */
   background-color: #fff;
   border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  border: 1px solid red;
+  /* box-shadow: 0 2px 10px rgba(0,0,0,0.1); */
 }
 
 .save-btn {
@@ -521,7 +550,7 @@ export default {
   cursor: pointer;
   font-size: 18px;
   transition: background-color 0.3s;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 }
 
 .save-btn:hover:not(:disabled) {
