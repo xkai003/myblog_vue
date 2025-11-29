@@ -537,7 +537,7 @@ export default {
   /* padding: 20px; */
   background-color: #fff;
   border-radius: 10px;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   /* box-shadow: 0 2px 10px rgba(0,0,0,0.1); */
 }
 
