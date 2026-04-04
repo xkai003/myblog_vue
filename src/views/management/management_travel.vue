@@ -1,6 +1,18 @@
 <template>
   <div class="box">
     <div class="center">
+      <div class="header">
+        <div class="header-content">
+          <div class="header-text">
+            <h1>后台管理系统</h1>
+            <p>博客灵魂聚焦地</p>
+          </div>
+          <div class="header-actions">
+            <span class="welcome-text">欢迎，{{ getCurrentUser() }}</span>
+            <button @click="logout" class="logout-btn">退出登录</button>
+          </div>
+        </div>
+      </div>
       <div class="form">
         <!-- <p>旅游</p> -->
         <div class="nav">
@@ -103,6 +115,16 @@ export default {
     }
   },
   methods: {
+    // 获取当前登录用户
+    getCurrentUser() {
+      return sessionStorage.getItem('username');
+    },
+    // 退出登录
+    logout() {
+      sessionStorage.removeItem('isLoggedIn');
+      sessionStorage.removeItem('username');
+      this.$router.push('/login');
+    },
     // 添加旅游
     async submit () {
       // 获取时间当前时间
@@ -248,6 +270,50 @@ export default {
   padding: 20px;
   background-color: #fff;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.box .center .header {
+  margin-bottom: 30px;
+}
+.box .center .header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+.box .center .header-text {
+  text-align: left;
+}
+.box .center .header-text h1 {
+  color: #333;
+  margin-bottom: 10px;
+}
+.box .center .header-text p {
+  color: #666;
+  font-size: 16px;
+  margin: 0;
+}
+.box .center .header-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.box .center .welcome-text {
+  color: #666;
+  font-size: 14px;
+  font-weight: 500;
+}
+.box .center .logout-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+.box .center .logout-btn:hover {
+  background-color: #c82333;
 }
 .box .center .nav{
   width: 100%;
