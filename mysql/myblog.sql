@@ -93,7 +93,7 @@ CREATE TABLE `userinfo` (
 
 LOCK TABLES `userinfo` WRITE;
 /*!40000 ALTER TABLE `userinfo` DISABLE KEYS */;
-INSERT INTO `userinfo` VALUES ('1775359539106','唐茂凯','ttt','2026-04-05 11:25:39'),('1775359714149','test','test','2026-04-05 11:28:34');
+INSERT INTO `userinfo` VALUES ('1775359539106','tmk','ttt','2026-04-05 11:25:39'),('1775359714149','test','test','2026-04-05 11:28:34');
 /*!40000 ALTER TABLE `userinfo` ENABLE KEYS */;
 UNLOCK TABLES;
 
