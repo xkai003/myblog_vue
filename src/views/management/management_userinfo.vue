@@ -14,28 +14,20 @@
         </div>
       </div>
       <div class="form">
-        <!-- <p>旅游</p> -->
+        <!-- <p>用户</p> -->
         <div class="nav">
           <router-link to="/management_works">作品</router-link>
           <router-link to="/management_notes">笔记</router-link>
-          <router-link to="/management_travel" style="color: #fff; background-color: #60cdf8;">旅游</router-link>
-          <router-link to="/management_userinfo">用户</router-link>
+          <router-link to="/management_travel">旅游</router-link>
+          <router-link to="/management_userinfo" style="color: #fff; background-color: #60cdf8;">用户</router-link>
         </div>
-        <div class="name">
-          <span>标题：</span>
-          <input type="text" placeholder="请输入标题(不超过45字)" v-model="name">
+        <div class="username">
+          <span>用户名：</span>
+          <input type="text" placeholder="请输入标题(不超过45字)" v-model="username">
         </div>
-        <div class="location">
-          <span>地点：</span>
-          <input type="text" placeholder="请输入地点(不超过45字)" v-model="location">
-        </div>
-        <div class="image">
-          <span>图片：</span>
-          <input type="text" placeholder="请输入图片(不超过45字)" v-model="image">
-        </div>
-        <div class="description">
-          <span>描述：</span>
-          <textarea placeholder="请输入描述(不超过45字)" v-model="description"></textarea>
+        <div class="password">
+          <span>密码：</span>
+          <input type="text" placeholder="请输入链接(不超过45字)" v-model="password">
         </div>
         <div class="btn">
           <button @click="submit()">提交</button>
@@ -43,21 +35,19 @@
         </div>
       </div>
       <div class="food">
-        <p>旅游列表</p>
-        <div class="travellist">
+        <p>用户列表</p>
+        <div class="userinfoslist">
           <ul>
-            <li>标题</li>
-            <li>地点</li>
-            <li>图片</li>
-            <li>描述</li>
+            <li>用户名</li>
+            <li>密码</li>
+            <li>添加时间</li>
             <li>操作</li>
           </ul>
           <!--  -->
-          <ul v-for="item in travellist" :key="item.id">
-            <li>{{ item.name }}</li>
-            <li>{{ item.location }}</li>
-            <li>{{ item.image }}</li>
-            <li>{{ item.description }}</li>
+          <ul v-for="item in userinfoslist" :key="item.id">
+            <li>{{ item.username }}</li>
+            <li>{{ item.password }}</li>
+            <li>{{ item.time }}</li>
             <li>
               <button @click="edit(item)">编辑</button>
               <button @click="del(item.id)">删除</button>
@@ -65,26 +55,21 @@
           </ul>
         </div>
       </div>
-      <!-- 编辑旅游弹窗 -->
-       <div class="edit" v-show="isshow">
+      <!-- 编辑用户弹窗 -->
+      <div class="edit" v-show="isshow">
         <div class="edit-form">
-          <h3>编辑旅游</h3>
-          <div class="name">
-            <span>标题：</span>
-            <input type="text" placeholder="请输入标题(不超过45字)" v-model="editname">
+          <h3>编辑用户</h3>
+          <div class="username">
+            <span>用户名：</span>
+            <input type="text" placeholder="请输入标题(不超过45字)" v-model="editusername">
           </div>
-          <div class="location">
-            <span>地点：</span>
-            <input type="text" placeholder="请输入地点(不超过45字)" v-model="editlocation">
+          <div class="password">
+            <span>密码：</span>
+            <input type="text" placeholder="请输入链接(不超过45字)" v-model="editpassword">
           </div>
-          <div class="image">
-            <span>图片：</span>
-            <input type="text" placeholder="请输入图片链接(不超过45字)" v-model="editimage">
-            <!-- <textarea placeholder="请输入图片链接" v-model="editimage"></textarea> -->
-          </div>
-          <div class="description">
-            <span>描述：</span>
-            <textarea placeholder="请输入描述(不超过45字)" v-model="editdescription"></textarea>
+          <div class="time">
+            <span>时间：</span>
+            <textarea placeholder="请输入技术栈(不超过45字)" v-model="edittime"></textarea>
           </div>
           <div class="btn">
             <button @click="editsubmit()">提交</button>
@@ -101,18 +86,16 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      name: '',
-      location: '',
-      image: '',
-      description: '',
-      travellist: [],
+      username: '',
+      password: '',
+      time: '',
+      userinfoslist: [],
       // 编辑信息
       isshow: false,
-      editname: '',
-      editlocation: '',
-      editimage: '',
-      editdescription: '',
-      selectedId: null // 用于存储当前选中的旅游的 ID
+      editusername: '',
+      editpassword: '',
+      edittime: '',
+      selectedId: null // 用于存储当前选中的用户的 ID
     }
   },
   methods: {
@@ -126,7 +109,7 @@ export default {
       sessionStorage.removeItem('username');
       this.$router.push('/login');
     },
-    // 添加旅游
+    // 添加用户
     async submit () {
       // 获取时间当前时间
         const getTimestamp = function() {
@@ -140,26 +123,23 @@ export default {
           return `${YYYY}-${MM}-${DD} ${HH}:${mm}:${ss}`;
         }
 
-      // alert("您输入的信息如下" + '\n' + this.name + '\n' + this.location + '\n' + this.image)
-      const newtravel = {
+      // alert("您输入的信息如下" + '\n' + this.username + '\n' + this.password + '\n' + this.time)
+      const newUserinfos = {
         id: Date.now(), // 用时间戳生成唯一 ID
-        name: this.name,
-        location: this.location,
+        username: this.username,
+        password: this.password,
         time: getTimestamp(), //把时间传递给我i服务器
-        look: "5",
-        image: this.image,
-        description: this.description,
       }
 
-      if (!newtravel.id || !newtravel.name || !newtravel.location || !newtravel.image || !this.description) {
-        alert('请填写所有课程信息！')
+      if (!newUserinfos.id || !newUserinfos.username || !newUserinfos.password || !newUserinfos.time) {
+        alert('请填写用户信息！')
         return
       }
 
       try {
-        const res = await axios.post('http://localhost:3000/travel', newtravel)
+        const res = await axios.post('http://localhost:3000/userinfo', newUserinfos)
         if (res.status === 201) {
-          alert('添加旅游成功！')
+          alert('添加用户成功！')
           // 重新刷新页面
           location.reload()
         } else {
@@ -175,20 +155,54 @@ export default {
     },
     // 重置动作
     reset() {
-      this.name = ''
-      this.location = ''
-      this.image = ''
-      this.description = ''
-      this.editdescription = ''
+      this.username = ''
+      this.password = ''
+      this.time = ''
     },
 
-    // 删除旅游
+    // 编辑用户
+    edit(item) {
+      this.isshow = true,
+      this.selectedId = item.id // 存储当前要修改的用户的 ID
+      this.editusername = item.username
+      this.editpassword = item.password
+      this.edittime = item.time
+    },
+    // 提交编辑信息
+    async editsubmit() {
+      if (!this.selectedId) {
+        alert('请先选择要修改的用户')
+        return
+      }
+      try {
+        // 发送 PUT 或 PATCH 请求到你的 API 以更新数据
+        const apiUrl = `http://localhost:3000/userinfo/${this.selectedId}` // 替换为你的更新 API
+        const response = await axios.put(apiUrl, { //  或者 Axios.patch()
+          id: this.selectedId,
+          username: this.editusername,
+          password: this.editpassword,
+          time: this.edittime
+        })
+        if (response.status === 200) {
+          alert('修改成功！')
+          this.isshow = false,
+          // 重新刷新页面
+          location.reload()
+        } else {
+          alert(`修改失败: ${response.data.error || '未知错误'}`)
+        }
+      } catch (error) {
+        
+      }
+    },
+    
+    // 删除用户
     async del (id) {
       if (!id) return
-      const confirmed = confirm('确定要删除该旅游吗？')
+      const confirmed = confirm('确定要删除该用户吗？')
       if (confirmed) {
         try {
-          const apiUrl = `http://localhost:3000/travel/${id}`
+          const apiUrl = `http://localhost:3000/userinfo/${id}`
           const response = await axios.delete(apiUrl)
           if (response.status === 200) {
             alert('删除成功！')
@@ -203,50 +217,13 @@ export default {
         }
       }
     },
-
-    // 编辑旅游
-    edit(item) {
-      this.isshow = true,
-      this.selectedId = item.id // 存储当前要修改的旅游的 ID
-      this.editname = item.name
-      this.editlocation = item.location
-      this.editimage = item.image
-      this.editdescription = item.description
-    },
-    // 提交编辑信息
-    async editsubmit() {
-      if (!this.selectedId) {
-        alert('请先选择要修改的旅游')
-        return
-      }
-      try {
-        // 发送 PUT 或 PATCH 请求到你的 API 以更新数据
-        const apiUrl = `http://localhost:3000/travel/${this.selectedId}` // 替换为你的更新 API
-        const response = await axios.put(apiUrl, { //  或者 Axios.patch()
-          name: this.editname,
-          location: this.editlocation,
-          image: this.editimage,
-          description: this.editdescription
-        })
-        if (response.status === 200) {
-          alert('修改成功！')
-          this.isshow = false,
-          // 重新刷新页面
-          location.reload()
-        } else {
-          alert(`修改失败: ${response.data.error || '未知错误'}`)
-        }
-      } catch (error) {
-        
-      }
-    }
   },
   // 请求后端数据
   async created() {
     try {
       const res = await axios.get('http://localhost:3000')
       console.log("后端数据：", res.data)
-      this.travellist = res.data.travel
+      this.userinfoslist = res.data.userinfo
     }catch(error){
       console.log("请求失败")
     }
@@ -346,10 +323,9 @@ export default {
 /* .box .center .form{
   border: 1px solid red;
 } */
-.box .form .location,
-.box .form .name,
-.box .form .image,
-.box .form .description{
+.box .form .password,
+.box .form .username,
+.box .form .time{
   display: flex;
   justify-content: space-between;
   margin: 10px;
@@ -394,14 +370,14 @@ export default {
   text-align: center;
   font-size: 25px;
 }
-.food .travellist ul{
+.food .userinfoslist ul{
   display: flex;
   justify-content: space-between;
   margin: 0;
   padding: 0;
   list-style: none;
 }
-.food .travellist ul li{
+.food .userinfoslist ul li{
   width: 40%;
   /* max-width: 20ch;  用 ch 单位设置宽度 (20ch 约等于 20个字符的宽度) */
   white-space: nowrap;      /* 1. 强制文本不换行 */
@@ -412,12 +388,12 @@ export default {
   /* background-color: #dfb5b5; */
   border-bottom: 1px solid rgba(184, 180, 180, 0.8);
 }
-.food .travellist ul li button{
+.food .userinfoslist ul li button{
   border: none;
   margin-left: 10px;
   padding: 10px;
 }
-.food .travellist ul li button:hover{
+.food .userinfoslist ul li button:hover{
   cursor: pointer;
   background-color: rgb(240, 205, 241);
   border: none;
@@ -434,28 +410,26 @@ export default {
 .edit .edit-form{
   margin: 300px auto;
   width: 500px;
-  /* height: 300px; */
+  height: 300px;
   padding: 20px;
   background-color: #fff;
 }
 .edit .edit-form h3{
   text-align: center;
 }
-.edit .edit-form .name,
-.edit .edit-form .location,
-.edit .edit-form .image,
-.edit .edit-form .description{
+.edit .edit-form .username,
+.edit .edit-form .password,
+.edit .edit-form .time{
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
 }
-.edit .edit-form .name input,
-.edit .edit-form .location input,
-.edit .edit-form .image input{
+.edit .edit-form .username input,
+.edit .edit-form .password input{
   width: 85%;
   height: 30px;
 }
-.edit .edit-form .description textarea{
+.edit .edit-form .time textarea{
   width: 85%;
   height: 60px;
 }

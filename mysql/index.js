@@ -14,9 +14,11 @@ const db = mysql.createPool({
   database: 'myblog',
 });
 
-// 示例路由。如果请求成功后直接访问 http://localhost:3000/ 就可以看到请求过来的数据
+// 
 app.get('/', async (req, res) => {
   try {
+    // userinfo
+    const [userinfo] = await db.query('SELECT * FROM userinfo');
     // travel
     const [travel] = await db.query('SELECT * FROM travel');
     // notes
@@ -26,12 +28,105 @@ app.get('/', async (req, res) => {
     
 
     res.json({
+      userinfo,
       travel,
       notes,
       works
     });
   } catch (err) {
     console.error('服务器错误:', err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+// ====================== userinfo ======================
+// ------ 添加数据 ------
+app.post('/userinfo', async (req, res) => {
+  const { id, username, password, time } = req.body;
+
+  if (!id || !username || !password || !time) {
+    return res.status(400).json({ error: '缺少用户信息字段', details: '请检查请求体是否包含所有必需字段' });
+  }
+
+  try {
+    const query = `
+      INSERT INTO userinfo (id, username, password, time)
+      VALUES (?, ?, ?, ?)
+    `;
+    const [result] = await db.query(query, [id, username, password, time]);
+
+    res.status(201).json({
+      message: '用户添加成功',
+      newId: result.insertId,
+      course: req.body
+    });
+  } catch (err) {
+    console.error('添加用户失败:', err);
+    // 改进：返回更详细的错误信息，包含原始错误和堆栈信息
+    res.status(500).json({
+      error: 'Internal Server Error',
+      details: err.message,
+      stack: err.stack  // 注意：在生产环境中，避免将完整的堆栈信息暴露给客户端
+    });
+  }
+});
+// ------ 编辑用户 ------
+app.put('/userinfo/:id', async (req, res) => {
+  console.log("Received PUT request to /userinfo/:id"); // 确认请求已到达
+  console.log("Request parameters (params):", req.params); // 输出所有 URL 参数
+  console.log("Request body (body):", req.body);       // 输出请求体
+  const userId = req.params.id;
+  const { id, username, password, time } = req.body;
+
+  if (!id || !username || !password || !time) {
+    console.log("Error: Missing id or username or password or time"); // 检查是否有缺少用户名或密码的错误
+    return res.status(400).json({ error: '缺少用户名或密码' });
+  }
+
+  let connection;
+  try {
+    connection = await db.getConnection();
+    // 构建 SQL UPDATE 语句
+    const query = `
+      UPDATE userinfo
+      SET id = ?, username = ?, password = ?, time = ?
+      WHERE id = ?
+    `;
+    //  执行查询
+    const [result] = await db.query(query, [id, username, password, time, userId]);
+    //  检查是否有行受到影响
+    if (result.affectedRows === 0) {
+      console.log("Error: User not found with ID:", userId); // 输出没找到用户的错误
+      return res.status(404).json({ error: '未找到要更新的用户' });
+    }
+
+    console.log("User information updated successfully. User ID:", userId); // 成功的log
+    res.json({ message: '用户信息更新成功', updatedId: userId });
+  } catch (err) {
+    console.error('更新用户信息失败:', err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  } finally {
+    if (connection) {
+      connection.release();
+    }
+  }
+});
+// ------ 删除数据 ------
+app.delete('/userinfo/:id', async (req, res) => {
+  const courseId = req.params.id; // 获取 URL 参数中的 ID
+  console.log(`尝试删除 ID 为 ${courseId} 的数据`);
+  
+  try {
+    // 执行 SQL DELETE 语句
+    const [result] = await db.query('DELETE FROM userinfo WHERE id = ?', [courseId]);
+    
+    // 检查是否有行受到影响
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: '未找到要删除的数据' });
+    }
+
+    res.json({ message: '数据删除成功', deletedId: courseId });
+  } catch (err) {
+    console.error('删除数据失败:', err);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
@@ -42,7 +137,7 @@ app.post('/works', async (req, res) => {
   const { id, title, label, time, look, technology } = req.body;
 
   if (!id || !title || !label || !time || !look || !technology) {
-    return res.status(400).json({ error: '缺少课程信息字段', details: '请检查请求体是否包含所有必需字段' });
+    return res.status(400).json({ error: '缺少作品信息字段', details: '请检查请求体是否包含所有必需字段' });
   }
 
   try {
@@ -53,12 +148,12 @@ app.post('/works', async (req, res) => {
     const [result] = await db.query(query, [id, title, label, time, look, technology]);
 
     res.status(201).json({
-      message: '课程添加成功',
+      message: '作品添加成功',
       newId: result.insertId,
       course: req.body
     });
   } catch (err) {
-    console.error('添加课程失败:', err);
+    console.error('添加作品失败:', err);
     // 改进：返回更详细的错误信息，包含原始错误和堆栈信息
     res.status(500).json({
       error: 'Internal Server Error',
@@ -111,7 +206,7 @@ app.put('/works/:id', async (req, res) => {
 // ------ 删除数据 ------
 app.delete('/works/:id', async (req, res) => {
   const courseId = req.params.id; // 获取 URL 参数中的 ID
-  console.log(`尝试删除 ID 为 ${courseId} 的课程`);
+  console.log(`尝试删除 ID 为 ${courseId} 的数据`);
   
   try {
     // 执行 SQL DELETE 语句
@@ -119,12 +214,12 @@ app.delete('/works/:id', async (req, res) => {
     
     // 检查是否有行受到影响
     if (result.affectedRows === 0) {
-      return res.status(404).json({ error: '未找到要删除的课程' });
+      return res.status(404).json({ error: '未找到要删除的数据' });
     }
 
-    res.json({ message: '课程删除成功', deletedId: courseId });
+    res.json({ message: '数据删除成功', deletedId: courseId });
   } catch (err) {
-    console.error('删除课程失败:', err);
+    console.error('删除数据失败:', err);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
@@ -135,7 +230,7 @@ app.post('/notes', async (req, res) => {
   const { id, title, label, time, look, technology } = req.body;
 
   if (!id || !title || !label || !time || !look || !technology) {
-    return res.status(400).json({ error: '缺少课程信息字段', details: '请检查请求体是否包含所有必需字段' });
+    return res.status(400).json({ error: '缺少数据信息字段', details: '请检查请求体是否包含所有必需字段' });
   }
 
   try {
@@ -146,12 +241,12 @@ app.post('/notes', async (req, res) => {
     const [result] = await db.query(query, [id, title, label, time, look, technology]);
 
     res.status(201).json({
-      message: '课程添加成功',
+      message: '数据添加成功',
       newId: result.insertId,
       course: req.body
     });
   } catch (err) {
-    console.error('添加课程失败:', err);
+    console.error('添加数据失败:', err);
     // 改进：返回更详细的错误信息，包含原始错误和堆栈信息
     res.status(500).json({
       error: 'Internal Server Error',
@@ -204,7 +299,7 @@ app.put('/notes/:id', async (req, res) => {
 // ------ 删除数据 ------
 app.delete('/notes/:id', async (req, res) => {
   const courseId = req.params.id; // 获取 URL 参数中的 ID
-  console.log(`尝试删除 ID 为 ${courseId} 的课程`);
+  console.log(`尝试删除 ID 为 ${courseId} 的数据`);
   
   try {
     // 执行 SQL DELETE 语句
@@ -212,12 +307,12 @@ app.delete('/notes/:id', async (req, res) => {
     
     // 检查是否有行受到影响
     if (result.affectedRows === 0) {
-      return res.status(404).json({ error: '未找到要删除的课程' });
+      return res.status(404).json({ error: '未找到要删除的数据' });
     }
 
-    res.json({ message: '课程删除成功', deletedId: courseId });
+    res.json({ message: '数据删除成功', deletedId: courseId });
   } catch (err) {
-    console.error('删除课程失败:', err);
+    console.error('删除数据失败:', err);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
@@ -228,7 +323,7 @@ app.post('/travel', async (req, res) => {
   const { id, name, location, image, time, description } = req.body;
 
   if (!id || !name || !location || !image || !time || !description) {
-    return res.status(400).json({ error: '缺少课程信息字段', details: '请检查请求体是否包含所有必需字段' });
+    return res.status(400).json({ error: '缺少数据信息字段', details: '请检查请求体是否包含所有必需字段' });
   }
 
   try {
@@ -239,12 +334,12 @@ app.post('/travel', async (req, res) => {
     const [result] = await db.query(query, [id, name, location, image, time, description]);
 
     res.status(201).json({
-      message: '课程添加成功',
+      message: '数据添加成功',
       newId: result.insertId,
       course: req.body
     });
   } catch (err) {
-    console.error('添加课程失败:', err);
+    console.error('添加数据失败:', err);
     // 改进：返回更详细的错误信息，包含原始错误和堆栈信息
     res.status(500).json({
       error: 'Internal Server Error',
@@ -297,7 +392,7 @@ app.put('/travel/:id', async (req, res) => {
 // ------ 删除数据 ------
 app.delete('/travel/:id', async (req, res) => {
   const courseId = req.params.id; // 获取 URL 参数中的 ID
-  console.log(`尝试删除 ID 为 ${courseId} 的课程`);
+  console.log(`尝试删除 ID 为 ${courseId} 的数据`);
   
   try {
     // 执行 SQL DELETE 语句
@@ -305,12 +400,12 @@ app.delete('/travel/:id', async (req, res) => {
     
     // 检查是否有行受到影响
     if (result.affectedRows === 0) {
-      return res.status(404).json({ error: '未找到要删除的课程' });
+      return res.status(404).json({ error: '未找到要删除的数据' });
     }
 
-    res.json({ message: '课程删除成功', deletedId: courseId });
+    res.json({ message: '数据删除成功', deletedId: courseId });
   } catch (err) {
-    console.error('删除课程失败:', err);
+    console.error('删除数据失败:', err);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });

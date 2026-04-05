@@ -24,7 +24,12 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import('../views/login/index.vue')
+    component: () => import('../views/login-and-register/login.vue')
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: () => import('../views/login-and-register/register.vue')
   },
   // meta: { requiresAuth: true } 的作用是当访问这些路由时先查询本地的sessionStorage中有没有登录状态，如果没有就先跳转到登录页面
   {
@@ -43,6 +48,12 @@ const routes = [
     path: '/management_travel',
     name: 'management_travel',
     component: () => import('../views/management/management_travel.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/management_userinfo',
+    name: 'management_userinfo',
+    component: () => import('../views/management/management_userinfo.vue'),
     meta: { requiresAuth: true }
   }
 ];

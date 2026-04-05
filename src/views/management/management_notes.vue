@@ -19,6 +19,7 @@
           <router-link to="/management_works">作品</router-link>
           <router-link to="/management_notes" style="color: #fff; background-color: #60cdf8;">笔记</router-link>
           <router-link to="/management_travel">旅游</router-link>
+          <router-link to="/management_userinfo">用户</router-link>
         </div>
         <div class="title">
           <span>标题：</span>
@@ -98,7 +99,7 @@ export default {
       edittitle: '',
       editlabel: '',
       edittechnology: '',
-      selectedId: null // 用于存储当前选中的学生的 ID
+      selectedId: null // 用于存储当前选中的笔记的 ID
     }
   },
   methods: {

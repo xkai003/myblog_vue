@@ -39,7 +39,7 @@ CREATE TABLE `notes` (
 
 LOCK TABLES `notes` WRITE;
 /*!40000 ALTER TABLE `notes` DISABLE KEYS */;
-INSERT INTO `notes` VALUES ('1','http://47.79.40.65:8886/','使用PM2部署vue2 + JSON 密码管理系统','2025-11-16 13:56:53','5','vue2、vuex、Node.js、JSON、axios、PM2'),('1764733288647','(不超过45字)','(不超过45字)','2025-12-03 11:41:28','5','(不超过45字)'),('1764747821965','测试','测试','2025-12-03 15:43:41','5','测试'),('2','http://47.79.40.65:8886/','笔记测试2','2025-12-2','5','笔记测试2'),('3','http://47.79.40.65:8886/','笔记测试3','2025-12-2','5','笔记测试3');
+INSERT INTO `notes` VALUES ('1774778061191','https://baidu.com','笔记测试一','2026-03-29 17:54:21','5','笔记测试一'),('1774778079590','https://baidu.com','笔记测试二','2026-03-29 17:54:39','5','笔记测试二'),('1774778096573','https://baidu.com','笔记测试三','2026-03-29 17:54:56','5','笔记测试三'),('1774798405437','2','2','2026-03-29 23:33:25','5','2'),('1774798746512','2','2','2026-03-29 23:39:06','5','2'),('1775288310952','1','1','2026-04-04 15:38:30','5','1'),('1775288316681','1','1','2026-04-04 15:38:36','5','1');
 /*!40000 ALTER TABLE `notes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -67,7 +67,7 @@ CREATE TABLE `travel` (
 
 LOCK TABLES `travel` WRITE;
 /*!40000 ALTER TABLE `travel` DISABLE KEYS */;
-INSERT INTO `travel` VALUES ('1764728598269','圣心大教堂','广州','2025-12-03 10:23:18','https://www.yuexiu.gov.cn/img/0/764/764782/8665100.png','广州圣心大教堂'),('1764730687143','越秀公园','广州','2025-12-03 10:58:07','https://www.yuexiu.gov.cn/img/0/764/764154/8664487.png','广州市越秀区越秀公园'),('1764732890339','流花湖公园','广州','2025-12-03 11:34:50','https://qcloud.dpfile.com/pc/3-OQtk0bF79ipbLQK8D-kLy-9nqkpZZc4oPBSUFgLAF0dyciPvbAlEFZ_qaWpz84.jpg','广州流花湖公园'),('2','上海','中国.上海','2025-10-10','https://myblog-vue-7ma.pages.dev/assets/avatar-9Zk-EnLI.jpg','第一次来上海');
+INSERT INTO `travel` VALUES ('1764728598269','圣心大教堂','广州','2025-12-03 10:23:18','https://www.yuexiu.gov.cn/img/0/764/764782/8665100.png','交通：一德路B口一直往巷子下走'),('1764730687143','越秀公园','广州','2025-12-03 10:58:07','https://www.yuexiu.gov.cn/img/0/764/764154/8664487.png','交通：越秀公园站B1口'),('1764732890339','流花湖公园','广州','2025-12-03 11:34:50','https://qcloud.dpfile.com/pc/3-OQtk0bF79ipbLQK8D-kLy-9nqkpZZc4oPBSUFgLAF0dyciPvbAlEFZ_qaWpz84.jpg','广州流花湖公园'),('1764761804305','广州动物园','广州','2025-12-03 19:36:44','https://www.gz.gov.cn/img/0/148/148091/6533885.jpg','交通：地铁5号线动物园站、地铁6号线黄花岗站A出口'),('1764762107250','粤海关','广州','2025-12-03 19:41:47','https://aos-comment.amap.com/B0FFMEK0R5/comment/e9ede5b444706eec53044ca4c14cd049_2048_2048_80.jpg','交通：8号线文化公园A口'),('1772272076528','a','a','2026-02-28 17:47:56','a','a'),('1774778305431','旅游测试一','北京','2026-03-29 17:58:25','https://www.yuexiu.gov.cn/img/0/764/764782/8665100.png','北京旅游测试'),('1774798410402','2','2','2026-03-29 23:33:30','2','2'),('1774798754231','2','2','2026-03-29 23:39:14','2','2'),('2','永庆坊','广州','2025-10-10','https://ak-d.tripcdn.com/images/1mi5612000d62kwvdBE59_W_640_0_R5_Q80.jpg?proc=source/trip','交通：黄沙站（1号线或6号线）B出口');
 /*!40000 ALTER TABLE `travel` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -79,9 +79,10 @@ DROP TABLE IF EXISTS `userinfo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `userinfo` (
-  `id` int NOT NULL,
+  `id` varchar(45) NOT NULL,
   `username` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
+  `time` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=gb2312;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -92,7 +93,7 @@ CREATE TABLE `userinfo` (
 
 LOCK TABLES `userinfo` WRITE;
 /*!40000 ALTER TABLE `userinfo` DISABLE KEYS */;
-INSERT INTO `userinfo` VALUES (1,'xiaotang','47794065');
+INSERT INTO `userinfo` VALUES ('1775359539106','唐茂凯','ttt','2026-04-05 11:25:39'),('1775359714149','test','test','2026-04-05 11:28:34');
 /*!40000 ALTER TABLE `userinfo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -105,7 +106,7 @@ DROP TABLE IF EXISTS `works`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `works` (
   `id` varchar(45) NOT NULL,
-  `label` varchar(45) NOT NULL,
+  `label` varchar(100) NOT NULL,
   `title` varchar(45) NOT NULL,
   `time` varchar(45) NOT NULL,
   `look` varchar(45) NOT NULL,
@@ -120,7 +121,7 @@ CREATE TABLE `works` (
 
 LOCK TABLES `works` WRITE;
 /*!40000 ALTER TABLE `works` DISABLE KEYS */;
-INSERT INTO `works` VALUES ('1764673905436','sdgfdsgfds','00000000','2025.08-2025.09','5','fsgfdsghfdsh'),('1764674052296','bbb','dafdda','2025.08-2025.09','5','dddddddd'),('1764674548785','444','444','2025.08-2025.09','5','4444'),('1764688033405','https://baidu.com','测试7','2025.08-2025.09','5','测试7'),('1764689984921','ddd','ddd','2025-12-02 23:39:44','5','ddd'),('1764694865707','000','000','2025-12-03 01:01:05','5','000'),('1764733250682','(不超过45字)','(不超过45字)','2025-12-03 11:40:50','5','(不超过45字)'),('1764747725715','测试1','测试1','2025-12-03 15:42:05','5','测试1'),('3','https://baidu.com','作品测试3','2025-12-2','5','作品测3'),('4','http://47.79.40.65:8886/','作品测试4','2025-12-3','5','作品测4'),('5','http://47.79.40.65:8886/','作品测试5','2025-12-12','5','作品测试5');
+INSERT INTO `works` VALUES ('1774777829579','https://baidu.com','作品测试一','2026-03-29 17:50:29','5','vue+mysql0'),('1774777865535','https://baidu.com','作品测试二','2026-03-29 17:51:05','5','vue+mysql二'),('1774777896790','https://baidu.com','作品测试三','2026-03-29 17:51:36','5','vue+mysql三'),('1774792538967','https://baidu.com','添加测试','2026-03-29 21:55:38','5','添加测试'),('1774797820665','1','1','2026-03-29 23:23:40','5','1'),('1774798735509','2','2','2026-03-29 23:38:55','5','2'),('1775227736096','1','1','2026-04-03 22:48:56','5','1'),('1775289998384','d','d','2026-04-04 16:06:38','5','d');
 /*!40000 ALTER TABLE `works` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,4 +142,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-12-03 16:21:18
+-- Dump completed on 2026-04-05 11:41:50

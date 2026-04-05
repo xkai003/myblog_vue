@@ -2,8 +2,8 @@
   <div class="login-container">
     <div class="login-card">
       <div class="login-header">
-        <h1>管理员登录</h1>
-        <p>请输入管理员账号和密码</p>
+        <h1>用户登录</h1>
+        <p>请输入用户名和密码</p>
       </div>
 
       <form @submit.prevent="handleLogin" class="login-form">
@@ -31,6 +31,10 @@
 
         <button type="submit" class="login-btn">登录</button>
       </form>
+
+      <div class="more">
+        <router-link to="/register">注册</router-link>
+      </div>
 
       <div v-if="errorMessage" class="error-message">
         {{ errorMessage }}
@@ -120,6 +124,8 @@ export default {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 400px;
+  display: flex;
+  flex-direction: column;
 }
 
 .login-header {
@@ -194,6 +200,19 @@ export default {
   opacity: 0.7;
   cursor: not-allowed;
   transform: none;
+}
+.more{
+  padding: 5px 0px;
+  /* background-color: #fcc2c2; */
+}
+.more a{
+  float: right;
+  margin-left: 8px;
+  text-decoration: none;
+  color: #764ba2;
+}
+.more a:hover{
+  color: #f53b1a;
 }
 
 .error-message {
