@@ -8,7 +8,7 @@
             <p>博客灵魂聚焦地</p>
           </div>
           <div class="header-actions">
-            <span class="welcome-text">欢迎，{{ getCurrentUser() }}</span>
+            <span class="welcome-text">欢迎 {{ getCurrentUser() }}!</span>
             <button @click="logout" class="logout-btn">退出登录</button>
           </div>
         </div>
@@ -43,7 +43,7 @@
         </div>
       </div>
       <div class="food">
-        <p>旅游列表</p>
+        <p>旅游列表({{ travellist.length }})</p>
         <div class="travellist">
           <ul>
             <li>标题</li>
@@ -53,16 +53,18 @@
             <li>操作</li>
           </ul>
           <!--  -->
-          <ul v-for="item in travellist" :key="item.id">
-            <li>{{ item.name }}</li>
-            <li>{{ item.location }}</li>
-            <li>{{ item.image }}</li>
-            <li>{{ item.description }}</li>
-            <li>
-              <button @click="edit(item)">编辑</button>
-              <button @click="del(item.id)">删除</button>
-            </li>
-          </ul>
+          <div class="overflowy">
+            <ul v-for="item in travellist" :key="item.id">
+              <li>{{ item.name }}</li>
+              <li>{{ item.location }}</li>
+              <li>{{ item.image }}</li>
+              <li>{{ item.description }}</li>
+              <li>
+                <button @click="edit(item)">编辑</button>
+                <button @click="del(item.id)">删除</button>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <!-- 编辑旅游弹窗 -->
@@ -92,6 +94,11 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div class="indexfoot">
+      <p>© 2026小凯的博客 Xiaokai's Blog</p>
     </div>
   </div>
 </template>
@@ -388,7 +395,7 @@ export default {
 /* food */
 .food{
   /* border: 1px solid red; */
-  margin-top: 100px;
+  margin-top: 50px;
 }
 .food p{
   text-align: center;
@@ -407,10 +414,14 @@ export default {
   white-space: nowrap;      /* 1. 强制文本不换行 */
   overflow: hidden;         /* 2. 隐藏超出容器的部分 */
   text-overflow: ellipsis;  /* 3. 将被隐藏的部分显示为省略号 */
-  padding: 20px 0px 20px 20px;
+  padding: 17px 0px 17px 20px;
   text-align: center;
   /* background-color: #dfb5b5; */
   border-bottom: 1px solid rgba(184, 180, 180, 0.8);
+}
+.food .travellist .overflowy{
+  max-height: 300px;
+  overflow-y: auto;
 }
 .food .travellist ul li button{
   border: none;
@@ -458,5 +469,16 @@ export default {
 .edit .edit-form .description textarea{
   width: 85%;
   height: 60px;
+}
+/* 页脚 */
+.indexfoot {
+  /* background-color: white; */
+  font-size: 15px;
+  color: #cac9c9;
+  text-align: center;
+}
+.indexfoot p{
+  font-size: 15px;
+  line-height: 60px;
 }
 </style>
